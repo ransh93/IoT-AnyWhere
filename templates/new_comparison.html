@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://visjs.github.io/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>{{ title }}</title>
+
+    <style type="text/css">
+       #mynetwork {
+            width: 900px;
+            height: 500px;
+            border: 1px solid lightgray;
+            display: block;
+        }
+
+       .container {
+          display: flex;
+          justify-content: center;
+        }
+
+        h2 {
+          text-align: center;
+        }
+
+        h4 {
+          text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+const options = {
+  manipulation: false,
+  autoResize: true,
+  layout: {
+    hierarchical: {
+      enabled: true,
+      levelSeparation: 150,
+      direction: 'UD',
+        nodeSpacing: 100
+
+    },
+      physics: false,
+  },
+      groups: {
+    myGroup: {color:{background:'red'}, borderWidth:3, x: 100, y: 50,     fixed: {
+      x:true,
+      y:true
+    }}
+  },
+};
+
+$(document).ready(function(){
+    var container = document.getElementById("mynetwork");
+    var data = { nodes: {{ nodes | tojson }}, edges: {{ edges | tojson }}};
+    var gph = new vis.Network(container, data, options)
+
+})
+</script>
+
+<h2>MUD Comparision Tool</h2>
+<br>
+    <h4>Similarity score: {{ compare_metrices[0] }}</h4>
+    <!-- <h4>1−(M1+M2−2∗L)/(R1+R2): {{ compare_metrices[1] }}</h4> -->
+    <h4>Generalization score: {{ compare_metrices[2] }}</h4>
+<br>
+<div class="row">
+    <div class="container">
+        <div class="panel-group">
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">Compare {{ first_mud_filename }} to {{ second_mud_filename }}</div>
+                    <div class="panel-body">
+                        {% for ace in first_direction_dt%}
+                            <br>
+                            ace name = {{ ace.name }}, ace rule type = <b>{{ ace.rule_type }}</b>
+                            <br><br>
+                            &emsp; Matches:
+                            <br>
+                            {% for match in ace.matches%}
+                                {% if match.match_type == "tcp" %}
+                                    {% if match.rule_type == "from" %}
+                                        &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>, direction initiated = {{ match.direction_initiated }}
+                                        <br>
+                                    {% elif match.rule_type == "to" %}
+                                        &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                                    {% endif %}
+                                    <br>
+                                {% endif %}
+
+                                {% if match.match_type == "udp" %}
+                                    &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                                    <br>
+                                {% endif %}
+
+                                {% if match.match_type == "icmp" %}
+                                    &emsp;&emsp; icmp type = <b>{{ match.icmp_type }}</b>, icmp code = <b>{{ match.icmp_code }}</b>
+                                    <br>
+                                {% endif %}
+
+                                {% if match.match_type == "ipv4" %}
+                                    {% if match.dns_name is defined %}
+                                        &emsp;&emsp; protocol = {{ match.protocol }}, dns name = <b>{{ match.dns_name }}</b>
+                                        <br>
+                                    {% elif match.ipv4_network is defined %}
+                                        &emsp;&emsp; protocol = {{ match.protocol }}, ipv4 network = <b>{{ match.ipv4_network }}</b>
+                                        <br>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">Compare {{ second_mud_filename }} to {{ first_mud_filename }}</div>
+                    <div class="panel-body">
+                        {% for ace in second_direction_dt%}
+                            <br>
+                            ace name = {{ ace.name }}, ace rule type = <b>{{ ace.rule_type }}</b>
+                            <br><br>
+                            &emsp; Matches:
+                            <br>
+                            {% for match in ace.matches%}
+                                {% if match.match_type == "tcp" %}
+                                    {% if match.rule_type == "from" %}
+                                        &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>, direction initiated = {{ match.direction_initiated }}
+                                        <br>
+                                        {% elif match.rule_type == "to" %}
+                                        &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                                        {% endif %}
+                                        <br>
+                                    {% endif %}
+
+                                {% if match.match_type == "udp" %}
+                                    &emsp;&emsp; operator = {{ match.operator }}, port = <b>{{ match.port }}</b>
+                                    <br>
+                                {% endif %}
+
+                                {% if match.match_type == "icmp" %}
+                                    &emsp;&emsp; icmp type = <b>{{ match.icmp_type }}</b>, icmp code = <b>{{ match.icmp_code }}</b>
+                                    <br>
+                                {% endif %}
+
+                                {% if match.match_type == "ipv4" %}
+                                    {% if match.dns_name is defined %}
+                                        &emsp;&emsp; protocol = {{ match.protocol }}, dns name = <b>{{ match.dns_name }}</b>
+                                        <br>
+                                    {% elif match.ipv4_network is defined %}
+                                        &emsp;&emsp; protocol = {{ match.protocol }}, ipv4 network = <b>{{ match.ipv4_network }}</b>
+                                        <br>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="mynetwork"></div>
+</div>
+
+</body>
+</html>
