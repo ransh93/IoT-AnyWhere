@@ -122,8 +122,8 @@ class MudComparer(object):
                 #if self.ace_similarity_logic(similarity_vector):
                 if similarity_vector.is_vector_similar:
                     print(similarity_vector)
-                    self.first_to_related_aces[first_acl_ace].append(second_acl_ace)
-                    self.second_to_related_aces[second_acl_ace].append(first_acl_ace)
+                    self.first_to_related_aces[first_acl_ace].append((second_acl_ace, similarity_vector))
+                    self.second_to_related_aces[second_acl_ace].append((first_acl_ace, similarity_vector))
 
     def ace_similarity_logic(self, similarity_vector):
         for sim in similarity_vector:

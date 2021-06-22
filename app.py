@@ -5,8 +5,8 @@ from logic.mudgee_parser import Parser
 from logic.comparison import MudComparer
 from logic.mongo_dal import MongoDal
 import logic.constants as constants
+from logic.mud_generalization import MudGeneralization
 import uuid
-from bson.json_util import dumps, loads
 
 
 app = Flask(__name__)
@@ -148,8 +148,14 @@ def compare_muds():
     compare_object = parse_muds_and_compare(first_mud_path, second_mud_path)
     two_directional_dt = compare_object[0]
     compare_metrices = compare_object[1]
-    related_rules = compare_object[2]
-    relations_graph = compare_object[3]
+    identical_rules = compare_object[2]
+    non_similar_rules = compare_object[3]
+    similar_rules = compare_object[4]
+    related_rules = compare_object[5]
+    relations_graph = compare_object[6]
+
+    mud_genaralization = MudGeneralization(identical_rules, non_similar_rules[0], non_similar_rules[1],
+                         non_similar_rules[2], non_similar_rules[3], similar_rules[0], similar_rules[1])
 
     head, first_file_name = os.path.split(first_mud_path)
     head, second_file_name = os.path.split(second_mud_path)
@@ -187,7 +193,6 @@ def upload_and_compare():
         compare_metrices = compare_object[1]
         related_rules = compare_object[2]
         relations_graph = compare_object[3]
-
 
         '''
         return render_template('comparison.html', first_direction_dt=two_directional_dt[0],
@@ -238,8 +243,22 @@ def parse_muds_and_compare(first_mud_file, second_mud_file, full_path=True):
     second_metric = mud_comparer.odd_rules_without_similar_rules_out_of_total_rules()
     third_metric = mud_comparer.generalization_rating()
 
+    metrices = (first_metric, second_metric, third_metric)
+    identical_rules = mud_comparer.final_identical_dt
+    related_rules = (mud_comparer.first_from_related_aces, mud_comparer.first_to_related_aces)
+    non_similar_rules = (mud_comparer.non_similar_first_from_aces, mud_comparer.non_similar_first_to_aces,
+                         mud_comparer.non_similar_second_from_aces, mud_comparer.non_similar_second_to_aces)
+    similar_rules = (mud_comparer.similar_first_from_related_aces, mud_comparer.similar_first_to_related_aces)
+    graph = (nodes, ages)
+
+    return mud_comparer.two_directional_comparison, metrices, identical_rules, non_similar_rules, \
+           similar_rules, related_rules, graph
+
+    '''
     return mud_comparer.two_directional_comparison, (first_metric, second_metric, third_metric),\
             (mud_comparer.first_from_related_aces, mud_comparer.first_to_related_aces), (nodes, ages)
+    '''
+
 
 '''
 def compare_muds(first_mud_filename, second_mud_filename):

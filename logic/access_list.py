@@ -74,7 +74,7 @@ class Ace(object):
 
     def similarity(self, second_mud_ace):
         #similarity_vector = []
-        sim_vector = similarity_vector()
+        sim_vector = SimilarityVector()
         for first_match in self.matches:
             for second_match in second_mud_ace.matches:
                 if first_match.match_type == second_match.match_type:
@@ -102,6 +102,13 @@ class Ace(object):
                 generalized_domain = match.generalized_domain
 
         return generalized_domain
+
+    def set_dns_to_generalized_domain(self, generalized_domain):
+        for match in self.matches:
+            if match.is_contains_domain():
+                match.is_domain_generalized = True
+                match.generalized_domain = generalized_domain
+                match.dns_name = generalized_domain
 
     def print_ace(self):
         print(f"name = {self.name}, rule type = {self.rule_type}")
@@ -195,26 +202,26 @@ class Match():
         if self.match_type == "tcp":
             if self.rule_type == "from":
                 if self.operator == other.operator and self.port == other.port and self.direction_initiated == other.direction_initiated:
-                    return similarity_component(self.match_type, True, 1, constants.PORT_PROTOCOL_BASED_SIMILARITY)
+                    return SimilarityComponent(self.match_type, True, 1, constants.PORT_PROTOCOL_BASED_SIMILARITY)
                     #return True, 1
                 else:
-                    return similarity_component(self.match_type, False, 0, constants.PORT_PROTOCOL_BASED_SIMILARITY)
+                    return SimilarityComponent(self.match_type, False, 0, constants.PORT_PROTOCOL_BASED_SIMILARITY)
                     #return False, 0
 
             elif self.rule_type == "to":
                 if self.operator == other.operator and self.port == other.port:
-                    return similarity_component(self.match_type, True, 1, constants.PORT_PROTOCOL_BASED_SIMILARITY)
+                    return SimilarityComponent(self.match_type, True, 1, constants.PORT_PROTOCOL_BASED_SIMILARITY)
                     #return True, 1
                 else:
-                    return similarity_component(self.match_type, False, 0, constants.PORT_PROTOCOL_BASED_SIMILARITY)
+                    return SimilarityComponent(self.match_type, False, 0, constants.PORT_PROTOCOL_BASED_SIMILARITY)
                     #return False, 0
 
         if self.match_type == "udp":
             if self.operator == other.operator and self.port == other.port:
-                return similarity_component(self.match_type, True, 1, constants.PORT_PROTOCOL_BASED_SIMILARITY)
+                return SimilarityComponent(self.match_type, True, 1, constants.PORT_PROTOCOL_BASED_SIMILARITY)
                 #return True, 1
             else:
-                return similarity_component(self.match_type, False, 0, constants.PORT_PROTOCOL_BASED_SIMILARITY)
+                return SimilarityComponent(self.match_type, False, 0, constants.PORT_PROTOCOL_BASED_SIMILARITY)
                 #return False, 0
 
         if self.match_type == "ipv4":
@@ -222,34 +229,39 @@ class Match():
                 # sim_value = self.jaro_similarity(self.dns_name, other.dns_name)
                 sim_value = self.domain_similarity(self.dns_name, other.dns_name)
                 if self.protocol == other.protocol and sim_value >= constants.SIMILARITY_VALUE:
-                    return similarity_component(self.match_type, True, sim_value, constants.DOMAIN_BASED_SIMILARITY)
+                    return SimilarityComponent(self.match_type, True, sim_value, constants.DOMAIN_BASED_SIMILARITY)
                     #return True, sim_value, self.generalized_domain
                 else:
-                    return similarity_component(self.match_type, False, sim_value, constants.DOMAIN_BASED_SIMILARITY)
+                    return SimilarityComponent(self.match_type, False, sim_value, constants.DOMAIN_BASED_SIMILARITY)
                     #return False, sim_value, self.generalized_domain
             elif hasattr(self, 'ipv4_network') and hasattr(other, 'ipv4_network'):
                 if self.protocol == other.protocol and self.ipv4_network == other.ipv4_network:
-                    return similarity_component(self.match_type, True, 1, constants.IP_BASED_SIMILARITY)
+                    return SimilarityComponent(self.match_type, True, 1, constants.IP_BASED_SIMILARITY)
                     return True, 1
                 else:
-                    return similarity_component(self.match_type, False, 0, constants.IP_BASED_SIMILARITY)
+                    return SimilarityComponent(self.match_type, False, 0, constants.IP_BASED_SIMILARITY)
                     return False, -1  # TODO: need a good metric for ips
             else:
-                return similarity_component(self.match_type, False, -1, "NOT IMPLEMENTED")
+                return SimilarityComponent(self.match_type, False, -1, "NOT IMPLEMENTED")
                 return False, -1  # in case there is a domain in one and an ip in the other
 
         if self.match_type == "icmp":
             if self.icmp_type == other.icmp_type and self.icmp_code == other.icmp_code:
-                return similarity_component(self.match_type, True, 1, constants.ICMP_BASED_SIMILARITY)
+                return SimilarityComponent(self.match_type, True, 1, constants.ICMP_BASED_SIMILARITY)
                 #return True, 1
             else:
-                return similarity_component(self.match_type, False, 0, constants.ICMP_BASED_SIMILARITY)
+                return SimilarityComponent(self.match_type, False, 0, constants.ICMP_BASED_SIMILARITY)
                 #return False, 0
 
         # TODO: can add more logic here
         if self.match_type == "ietf-mud:mud":
-            return similarity_component(self.match_type, True, 1, "ietf-mud:mud")
+            return SimilarityComponent(self.match_type, True, 1, "ietf-mud:mud")
             #return True, 1
+
+    def is_contains_domain(self):
+        if self.match_type == "ipv4":
+            if hasattr(self, 'dns_name'):
+                return True
 
     # if we got here it means that both domains are not equal so the similarity score can never be 1 only close to it
     def domain_similarity(self, a, b):
