@@ -1,0 +1,174 @@
+{
+    "ietf-mud:mud": {
+        "mud-version": 1,
+        "mud-url": "https://lighting.example.com/lightbulb2000",
+        "is-supported": 48,
+        "systeminfo": "The BMS Example Light Bulb",
+        "cache-validity": true,
+        "last-update": "2021-06-26T17:24:45",
+        "from-device-policy": {
+            "access-lists": {
+                "access-list": [
+                    {
+                        "name": "mud-77334-v4fr"
+                    }
+                ]
+            }
+        }
+    },
+    "ietf-access-control-list:acls": {
+        "acl": {
+            "name": "mud-77334-v4fr",
+            "type": "ipv4",
+            "aces": {
+                "ace": [
+                    {
+                        "name": "cl0-frdev",
+                        "matches": {
+                            "ipv4": {
+                                "protocol": 6,
+                                "ietf-acldns:dst-dnsname": "api.eu.xiaoyi.com"
+                            },
+                            "tcp": {
+                                "ietf-mud:direction-initiated": "from-device",
+                                "source-port": {
+                                    "operator": "eq",
+                                    "port": 443
+                                }
+                            }
+                        },
+                        "actions": {
+                            "forwarding": "accept"
+                        }
+                    },
+                    [
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "destination-ipv4-network": "8.8.8.8/32"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 53
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        }
+                    ],
+                    [
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "destination-ipv4-network": "147.161.9.36/32"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 32320
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        }
+                    ],
+                    [
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "destination-ipv4-network": "147.161.9.180/32"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 26903
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        }
+                    ],
+                    [
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "destination-ipv4-network": "49.51.203.28/32"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        }
+                    ],
+                    [
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "destination-ipv4-network": "*.xiaoyi.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 80
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        }
+                    ],
+                    [
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "destination-ipv4-network": "*.xiaoyi.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        }
+                    ]
+                ]
+            }
+        }
+    }
+}

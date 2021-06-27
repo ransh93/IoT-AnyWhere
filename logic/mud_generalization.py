@@ -1,5 +1,7 @@
 import copy
 import logic.constants as constants
+from logic.mud_generator import MudGenerator
+
 
 class MudGeneralization(object):
     def __init__(self, identical_rules, first_non_similar_from_rules, first_non_similar_to_rules,
@@ -10,6 +12,8 @@ class MudGeneralization(object):
         self.non_similar_to_rules = []
         self.generalized_from_rules = []
         self.generalized_to_rules = []
+        self.from_rules = []
+        self.to_rules = []
 
         # identical rules from/to separation
         for identical_rule in identical_rules:
@@ -26,7 +30,13 @@ class MudGeneralization(object):
         self.create_generalized_rules(generalized_from_rules, "from")
         self.create_generalized_rules(generalized_to_rules, "to")
 
-        print("done")
+        self.from_rules = self.identical_from_rules + self.non_similar_from_rules + self.generalized_from_rules
+        self.to_rules = self.identical_to_rules + self.non_similar_to_rules + self.generalized_to_rules
+
+        # TODO: address the url and system info parameters to put the real ones
+        mud_generator = MudGenerator(1, 'https://lighting.example.com/lightbulb2000', 48, True,
+                          'The BMS Example Light Bulb')
+        mud_generator.generate_mud(self.from_rules, self.to_rules)
 
     def create_generalized_rules(self, rules_to_generalize, direction):
         for base_rule,relations_rules in rules_to_generalize.items():
@@ -71,9 +81,6 @@ class MudGeneralization(object):
             self.add_generalized_rule_logic(rule, self.generalized_from_rules)
         else:
             self.add_generalized_rule_logic(rule, self.generalized_to_rules)
-
-
-        # TODO: add check if rule doesnt exists in the rule list
 
     def add_generalized_rule_logic(self, new_rule, rules):
         for rule in rules:

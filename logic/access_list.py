@@ -1,5 +1,6 @@
 import logic.constants as constants
 import jellyfish
+from muddy.models import Direction, IPVersion, Protocol, MatchType
 from logic.similarity import *
 
 class AccessList():
@@ -102,6 +103,32 @@ class Ace(object):
                 generalized_domain = match.generalized_domain
 
         return generalized_domain
+
+    def get_ip_version_and_protocol(self):
+        ip_version = None
+        protocol = None
+
+        for match in self.matches:
+            if match .match_type == "ipv4":
+                ip_version = IPVersion.IPV4
+
+            if match .match_type == "tcp":
+                protocol = Protocol.TCP
+
+            if match .match_type == "udp":
+                protocol = Protocol.UDP
+
+        return ip_version, protocol
+        # TODO: what do i do in case of ICMP, seems muddy dose not support it
+
+
+    def get_ace_identifier(self):
+        identifier = self.matches[0].get_match_identifier()
+        return identifier
+
+    def get_ace_port(self):
+        port = self.matches[1].port
+        return port
 
     def set_dns_to_generalized_domain(self, generalized_domain):
         for match in self.matches:
@@ -237,13 +264,13 @@ class Match():
             elif hasattr(self, 'ipv4_network') and hasattr(other, 'ipv4_network'):
                 if self.protocol == other.protocol and self.ipv4_network == other.ipv4_network:
                     return SimilarityComponent(self.match_type, True, 1, constants.IP_BASED_SIMILARITY)
-                    return True, 1
+                    #return True, 1
                 else:
                     return SimilarityComponent(self.match_type, False, 0, constants.IP_BASED_SIMILARITY)
-                    return False, -1  # TODO: need a good metric for ips
+                    #return False, -1  # TODO: need a good metric for ips
             else:
                 return SimilarityComponent(self.match_type, False, -1, "NOT IMPLEMENTED")
-                return False, -1  # in case there is a domain in one and an ip in the other
+                #return False, -1  # in case there is a domain in one and an ip in the other
 
         if self.match_type == "icmp":
             if self.icmp_type == other.icmp_type and self.icmp_code == other.icmp_code:
@@ -281,6 +308,13 @@ class Match():
         self.generalized_domain = '*' + self.generalized_domain
         return similarity_score / similarity_max_score
 
+    def get_match_identifier(self):
+        if hasattr(self, 'dns_name'):
+            return self.dns_name
+        elif hasattr(self, 'ipv4_network'):
+            return self.ipv4_network
+        else:
+            return None
 
     def jaro_similarity(self, a, b):
         return jellyfish.jaro_similarity(a, b)
