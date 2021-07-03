@@ -5,12 +5,12 @@
         "is-supported": 48,
         "systeminfo": "The BMS Example Light Bulb",
         "cache-validity": true,
-        "last-update": "2021-07-02T22:47:39",
+        "last-update": "2021-07-03T09:17:04",
         "from-device-policy": {
             "access-lists": {
                 "access-list": [
                     {
-                        "name": "mud-16062-v4fr"
+                        "name": "mud-48971-v4fr"
                     }
                 ]
             }
@@ -19,7 +19,7 @@
             "access-lists": {
                 "access-list": [
                     {
-                        "name": "mud-16062-v4to"
+                        "name": "mud-48971-v4to"
                     }
                 ]
             }
@@ -28,7 +28,7 @@
     "ietf-access-control-list:access-lists": {
         "acl": [
             {
-                "name": "mud-16062-v4fr",
+                "name": "mud-48971-v4fr",
                 "type": "ipv4",
                 "aces": {
                     "ace": [
@@ -55,7 +55,7 @@
                 }
             },
             {
-                "name": "mud-16062-v4to",
+                "name": "mud-48971-v4to",
                 "type": "ipv4",
                 "aces": {
                     "ace": [

@@ -35,7 +35,7 @@ class MudGenerator(object):
             else:
                 acl = (make_acls([ip_version], identifier, protocol, MatchType.IS_CLOUD, direction_initiated,
                               [port], None, acl_names))
-                self.from_acl[0]["aces"]["ace"].append(acl["aces"]["ace"])
+                self.from_acl[0]["aces"]["ace"].append(acl["aces"]["ace"][0])
 
 
         # handel to rules
@@ -48,11 +48,11 @@ class MudGenerator(object):
             self.policies.update(make_policy(direction_initiated, acl_names))
             if len(self.to_acl) == 0:
                 self.to_acl.append(make_acls([ip_version], identifier, protocol, MatchType.IS_CLOUD, direction_initiated,
-                              None, [port], acl_names))
+                                   [port], None, acl_names))
             else:
                 acl = (make_acls([ip_version], identifier, protocol, MatchType.IS_CLOUD, direction_initiated,
-                              None, [port], acl_names))
-                self.to_acl[0]["aces"]["ace"].append(acl["aces"]["ace"])
+                                 [port], None, acl_names))
+                self.to_acl[0]["aces"]["ace"].append(acl["aces"]["ace"][0])
 
         self.acl = self.from_acl + self.to_acl
 
@@ -60,6 +60,6 @@ class MudGenerator(object):
         if len(self.acl) != 0 or len(self.policies) != 0:
             mud = make_mud(self.support_info, self.policies, self.acl)
 
-            f = open("test1.json", "w")
+            f = open("test.json", "w")
             f.write(json.dumps(mud, indent=4))
             f.close()
