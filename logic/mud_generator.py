@@ -18,6 +18,9 @@ class MudGenerator(object):
 
         # TODO: MatchType.IS_CLOUD read more about it
 
+        if len(from_rules) == 0 or len(to_rules) == 0:
+            return
+
         # handel from rules
         direction_initiated = Direction.FROM_DEVICE
         for rule in from_rules:
@@ -28,10 +31,10 @@ class MudGenerator(object):
             self.policies.update(make_policy(direction_initiated, acl_names))
             if len(self.from_acl) == 0:
                 self.from_acl.append(make_acls([ip_version], identifier, protocol, MatchType.IS_CLOUD, direction_initiated,
-                              None, [port], acl_names))
+                              [port], None, acl_names))
             else:
                 acl = (make_acls([ip_version], identifier, protocol, MatchType.IS_CLOUD, direction_initiated,
-                              None, [port], acl_names))
+                              [port], None, acl_names))
                 self.from_acl[0]["aces"]["ace"].append(acl["aces"]["ace"])
 
 
@@ -52,11 +55,11 @@ class MudGenerator(object):
                 self.to_acl[0]["aces"]["ace"].append(acl["aces"]["ace"])
 
         self.acl = self.from_acl + self.to_acl
-        mud = make_mud(self.support_info, self.policies, self.acl)
 
+        # when they are None is means we have no rules and policies
+        if len(self.acl) != 0 or len(self.policies) != 0:
+            mud = make_mud(self.support_info, self.policies, self.acl)
 
-        f = open("test.json", "w")
-        f.write(json.dumps(mud, indent=4))
-        f.close()
-
-        print("done")
+            f = open("test1.json", "w")
+            f.write(json.dumps(mud, indent=4))
+            f.close()

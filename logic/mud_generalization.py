@@ -38,6 +38,7 @@ class MudGeneralization(object):
                           'The BMS Example Light Bulb')
         mud_generator.generate_mud(self.from_rules, self.to_rules)
 
+
     def create_generalized_rules(self, rules_to_generalize, direction):
         for base_rule,relations_rules in rules_to_generalize.items():
             domain_based_similarity_existence = self.check_domain_based_similarity_existence(relations_rules)
