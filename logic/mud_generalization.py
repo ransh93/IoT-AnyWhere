@@ -5,7 +5,8 @@ from logic.mud_generator import MudGenerator
 
 class MudGeneralization(object):
     def __init__(self, identical_rules, first_non_similar_from_rules, first_non_similar_to_rules,
-                 second_non_similar_from_rules, second_non_similar_to_rules, generalized_from_rules, generalized_to_rules):
+                 second_non_similar_from_rules, second_non_similar_to_rules, generalized_from_rules, generalized_to_rules,
+                 first_mud_name, first_mud_location, second_mud_name, second_mud_location):
         self.identical_from_rules = []
         self.identical_to_rules = []
         self.non_similar_from_rules = []
@@ -36,7 +37,8 @@ class MudGeneralization(object):
         # TODO: address the url and system info parameters to put the real ones
         mud_generator = MudGenerator(1, 'https://lighting.example.com/lightbulb2000', 48, True,
                           'The BMS Example Light Bulb')
-        mud_generator.generate_mud(self.from_rules, self.to_rules)
+        generalized_mud_name = "{}_and_{}_generalization.json".format(first_mud_name, second_mud_name)
+        mud_generator.generate_mud(self.from_rules, self.to_rules, generalized_mud_name)
 
 
     def create_generalized_rules(self, rules_to_generalize, direction):

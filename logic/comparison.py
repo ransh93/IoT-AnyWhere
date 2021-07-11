@@ -188,7 +188,7 @@ class MudComparer(object):
                         "label": label_text,
                         "shape": shape,
                         "font": font,
-                        "group": 'myGroup'
+
                     }
 
         nodes.append(base_node)

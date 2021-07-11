@@ -14,7 +14,7 @@ class MudGenerator(object):
         self.to_acl = []
         self.acl = []
 
-    def generate_mud(self, from_rules, to_rules):
+    def generate_mud(self, from_rules, to_rules, generalized_mud_name):
 
         # TODO: MatchType.IS_CLOUD read more about it
 
@@ -60,6 +60,6 @@ class MudGenerator(object):
         if len(self.acl) != 0 or len(self.policies) != 0:
             mud = make_mud(self.support_info, self.policies, self.acl)
 
-            f = open("test.json", "w")
+            f = open(generalized_mud_name, "w")
             f.write(json.dumps(mud, indent=4))
             f.close()

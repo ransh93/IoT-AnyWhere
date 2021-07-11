@@ -121,14 +121,16 @@
               $('#compare').click(function () {
 
                   alert("send to comapre")
-      var ids = getIdSelections()
+    var ids = getIdSelections()
                   alert(ids)
-
+    var locations = getMudsLocationSelections()
+                  alert(locations)
      var files_path = getMudsPathsSelections()
      alert(files_path)
                   console.log(files_path)
 
-                  post('/compare', { first_mud_path: files_path[0], second_mud_path: files_path[1] })
+                  post('/compare', { first_mud_path: files_path[0], second_mud_path: files_path[1], first_mud_name: ids[0], second_mud_name: ids[1],
+                  first_mud_location: locations[0], second_mud_location: locations[1]})
 
      /*
      $('#table').bootstrapTable('remove', {
@@ -216,6 +218,12 @@
   function getMudsPathsSelections() {
     return $.map($('#table').bootstrapTable('getSelections'), function (row) {
       return row.mud_file_path
+    })
+  }
+
+  function getMudsLocationSelections() {
+    return $.map($('#table').bootstrapTable('getSelections'), function (row) {
+      return row.dev_location
     })
   }
 

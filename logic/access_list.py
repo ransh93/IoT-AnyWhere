@@ -90,7 +90,7 @@ class Ace(object):
         return sim_vector
 
     def get_ace_lable_text(self):
-        lable_text = f"name = {self.name}, rule type = {self.rule_type} \n \t Matches: \n"
+        lable_text = f"Rule direction = {self.rule_type} \n\nRule details: \n"
         for match in self.matches:
             lable_text += match.get_match_lable_text()
 
@@ -319,25 +319,31 @@ class Match():
     def jaro_similarity(self, a, b):
         return jellyfish.jaro_similarity(a, b)
 
+    def convert_protocol_identification(self, protocol_id):
+        if protocol_id == 6:
+            return "TCP"
+        elif protocol_id == 17:
+            return "UDP"
+
     def get_match_lable_text(self):
         if self.match_type == "tcp":
             if self.rule_type == "from":
-                return (f"\t\t operator = {self.operator}, port = {self.port}, direction initiated = {self.direction_initiated} \n")
+                return (f"\t\t Port = {self.port}, Direction = {self.direction_initiated} \n")
 
             elif self.rule_type == "to":
-                return(f"\t\t operator = {self.operator}, port = {self.port} \n")
+                return(f"\t\t Port = {self.port} \n")
 
         if self.match_type == "udp":
-            return(f"\t\t operator = {self.operator}, port = {self.port} \n")
+            return(f"\t\t Port = {self.port} \n")
 
         if self.match_type == "ipv4":
             if hasattr(self, 'dns_name'):
-                return(f"\t\t protocol = {self.protocol}, dns name = {self.dns_name} \n")
+                return(f"\t\t Protocol = {self.convert_protocol_identification(self.protocol)}, Doamin = {self.dns_name} \n")
             elif hasattr(self, 'ipv4_network'):
-                return(f"\t\t protocol = {self.protocol}, ipv4 network = {self.ipv4_network} \n")
+                return(f"\t\t Protocol = {self.convert_protocol_identification(self.protocol)}, IP = {self.ipv4_network} \n")
 
         if self.match_type == "icmp":
-            return(f"\t\t icmp type = {self.icmp_type}, icmp code = {self.icmp_code} \n")
+            return(f"\t\t Icmp type = {self.icmp_type}, Icmp code = {self.icmp_code} \n")
 
 
     def print_match(self):

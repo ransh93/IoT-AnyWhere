@@ -144,6 +144,10 @@ def upload_mud():
 def compare_muds():
     first_mud_path = request.form.get('first_mud_path')
     second_mud_path = request.form.get('second_mud_path')
+    first_mud_name = request.form.get('first_mud_name')
+    second_mud_name = request.form.get('second_mud_name')
+    first_mud_location = request.form.get('first_mud_location')
+    second_mud_location = request.form.get('second_mud_location')
 
     compare_object = parse_muds_and_compare(first_mud_path, second_mud_path)
     two_directional_dt = compare_object[0]
@@ -155,7 +159,8 @@ def compare_muds():
     relations_graph = compare_object[6]
 
     mud_genaralization = MudGeneralization(identical_rules, non_similar_rules[0], non_similar_rules[1],
-                         non_similar_rules[2], non_similar_rules[3], similar_rules[0], similar_rules[1])
+                         non_similar_rules[2], non_similar_rules[3], similar_rules[0], similar_rules[1],
+                         first_mud_name, first_mud_location, second_mud_name, second_mud_location)
 
     head, first_file_name = os.path.split(first_mud_path)
     head, second_file_name = os.path.split(second_mud_path)
