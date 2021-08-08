@@ -170,11 +170,13 @@ class MudComparer(object):
         # TODO: change the color by the different mud
         if direction == 'from':
             color = "#FFCFCF"
+            #color = "#FFFFFF"
         else:
             color = "#90ee90"
+            #color = "#FFFFFF"
 
         size = 150
-        font = {"face": "monospace", "align": "left"}
+        node_font = {"face": "monospace", "align": "left", "size": 24}
         shape = "box"
         physics = "false"
         smooth = {"type": "cubicBezier"}
@@ -187,7 +189,8 @@ class MudComparer(object):
                         "size": size,
                         "label": label_text,
                         "shape": shape,
-                        "font": font,
+                        "font": node_font,
+                        "color": color
 
                     }
 
@@ -199,22 +202,70 @@ class MudComparer(object):
                                 "id": relation_rule.name,
                                 "size": size,
                                 "label": label_text,
-                                "color": color,
+                                "color": "#90ee90",
                                 "shape": shape,
-                                "font": font,
+                                "font": node_font,
                             }
 
             nodes.append(relation_node)
 
+            edge_font = {"face": "monospace", "size": 24}
             edge = {
                         "from": base_rule.name,
                         "to": relation_rule.name,
                         "physics": physics,
-                        "label": similarity_vector.primary_similarity_type, # TODO: change to similarity type, what to put here?
+                        "label": similarity_vector.primary_similarity_type,
                         "arrows": "to;from",
-                        "smooth": smooth
+                        "smooth": smooth,
+                        "font": edge_font
                     }
+
             edges.append(edge)
+
+            '''
+            if not similarity_vector.primary_similarity_type == "PORT_PROTOCOL_BASED_SIMILARITY":
+                edges.append(edge)
+
+
+        #base_lable_text = f"Rule direction = from \n\nRule details: \n\t\t Protocol = TCP, Doamin = api.xiaoyi.com.tw \n\t\t Source port = *, Destination Port = 443 \n"
+        base_lable_text = f"Rule direction = from \n\nRule details: \n\t\t Protocol = TCP, Doamin = aps1-api.tplinkra.com \n\t\t Source port = *, Destination Port = 443 \n"
+        #base_lable_text = f"Rule direction = from \n\nRule details: \n\t\t Protocol = UDP, IP = 147.161.9.36/32 \n\t\t Source port = *, Destination Port = 32320 \n"
+
+        base_node = {
+                        "id": "base",
+                        "size": size,
+                        "label": base_lable_text,
+                        "shape": shape,
+                        "font": node_font,
+                        "color": color
+
+                    }
+
+        #re_lable_text = f"Rule direction = from \n\nRule details: \n\t\t Protocol = TCP, Doamin = api.eu.xiaoyi.com \n\t\t Source port = *, Destination Port = 443 \n"
+        re_lable_text = f"Rule direction = from \n\nRule details: \n\t\t Protocol = TCP, Doamin = use1-api.tplinkra.com \n\t\t Source port = *, Destination Port = 443 \n"
+        #re_lable_text = f"Rule direction = from \n\nRule details: \n\t\t Protocol = UDP, IP = 147.161.9.60/32 \n\t\t Source port = *, Destination Port = 3863 \n"
+
+        relation_node = {
+            "id": "relation",
+            "size": size,
+            "label": re_lable_text,
+            "color": color,
+            "shape": shape,
+            "font": node_font,
+        }
+
+        edge = {
+            "from": "base",
+            "to": "relation",
+            "physics": physics,
+            "arrows": "to;from",
+            "smooth": smooth,
+            "font": edge_font
+        }
+
+        nodes = [base_node,relation_node]
+        edges = [edge]
+        '''
 
         return nodes, edges
 

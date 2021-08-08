@@ -1,7 +1,9 @@
 from muddy.maker import make_mud, make_acl_names, make_policy, make_acls, make_support_info
 from muddy.models import Direction, MatchType
+import logic.constants as constants
 import json
 import random
+import uuid
 
 
 class MudGenerator(object):
@@ -14,7 +16,8 @@ class MudGenerator(object):
         self.to_acl = []
         self.acl = []
 
-    def generate_mud(self, from_rules, to_rules, generalized_mud_name):
+    def generate_mud(self, from_rules, to_rules, mongo_dal, generalized_mud_name, generalized_title_name,
+                     first_mud_location, second_mud_location, device_name, device_type):
 
         # TODO: MatchType.IS_CLOUD read more about it
 
@@ -27,6 +30,9 @@ class MudGenerator(object):
             ip_version, protocol = rule.get_ip_version_and_protocol()
             identifier = rule.get_ace_identifier()  # get domain of ip
             port = rule.get_ace_port()  # get port
+            # in order to be compatible to weird mud from icm paper
+            if port is None or identifier is None or protocol is None:
+                continue
             acl_names = make_acl_names(self.mud_name, ip_version, direction_initiated)
             self.policies.update(make_policy(direction_initiated, acl_names))
             if len(self.from_acl) == 0:
@@ -44,6 +50,9 @@ class MudGenerator(object):
             ip_version, protocol = rule.get_ip_version_and_protocol()
             identifier = rule.get_ace_identifier()  # get domain of ip
             port = rule.get_ace_port()  # get port
+            # in order to be compatible to weird mud from icm paper
+            if port is None or identifier is None or protocol is None:
+                continue
             acl_names = make_acl_names(self.mud_name, ip_version, direction_initiated)
             self.policies.update(make_policy(direction_initiated, acl_names))
             if len(self.to_acl) == 0:
@@ -60,6 +69,32 @@ class MudGenerator(object):
         if len(self.acl) != 0 or len(self.policies) != 0:
             mud = make_mud(self.support_info, self.policies, self.acl)
 
-            f = open(generalized_mud_name, "w")
-            f.write(json.dumps(mud, indent=4))
-            f.close()
+            # write our mud file to the server disk
+            #full_mud_file_path = "{}\{}".format(constants.UPLOAD_FOLDER, generalized_mud_name)
+            #f = open(full_mud_file_path, "w")
+            #mud_content = f.write(json.dumps(mud, indent=4))
+            #f.close()
+
+            # insert the mud file into the database
+            #self.insert_mud_into_db(mongo_dal, mud, full_mud_file_path, generalized_title_name , first_mud_location, second_mud_location, device_name, device_type)
+
+    def insert_mud_into_db(self, mongo_dal, mud_content, full_mud_file_path, generalized_title_name, first_mud_location, second_mud_location, device_name, device_type):
+        # prepare mud db data
+        creator = "mudgee"
+        mud_location = "generalization_{}_{}".format(first_mud_location, second_mud_location)
+
+        # set all dict data
+        generalized_mud_data = dict()
+        generalized_mud_data['_id'] = str(uuid.uuid4())
+        generalized_mud_data['mud_name'] = generalized_title_name
+        generalized_mud_data['device_name'] = device_name
+        generalized_mud_data['device_type'] = device_type
+        generalized_mud_data['creator'] = creator
+        generalized_mud_data['dev_location'] = mud_location
+        generalized_mud_data['mud_file_path'] = full_mud_file_path
+        generalized_mud_data['mud_content'] = mud_content
+
+        # insert the given data in to the DB
+        mongo_dal.insert(generalized_mud_data)
+
+        # TODO: add a check that this inserted mud is not exist and if not insert

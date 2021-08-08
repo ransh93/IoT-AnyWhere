@@ -122,15 +122,13 @@
 
                   alert("send to comapre")
     var ids = getIdSelections()
-                  alert(ids)
     var locations = getMudsLocationSelections()
-                  alert(locations)
-     var files_path = getMudsPathsSelections()
-     alert(files_path)
-                  console.log(files_path)
+    var files_path = getMudsPathsSelections()
+    var devices_type = getDeviceTypeSelections()
+    var devices_name = getDeviceNameSelections()
 
-                  post('/compare', { first_mud_path: files_path[0], second_mud_path: files_path[1], first_mud_name: ids[0], second_mud_name: ids[1],
-                  first_mud_location: locations[0], second_mud_location: locations[1]})
+    post('/compare', { first_mud_path: files_path[0], second_mud_path: files_path[1], first_mud_name: ids[0], second_mud_name: ids[1],
+    first_mud_location: locations[0], second_mud_location: locations[1], device_type: devices_type[0], device_name: devices_name[0]})
 
      /*
      $('#table').bootstrapTable('remove', {
@@ -212,6 +210,18 @@
   function getIdSelections() {
     return $.map($('#table').bootstrapTable('getSelections'), function (row) {
       return row.mud_name
+    })
+  }
+
+  function getDeviceTypeSelections() {
+    return $.map($('#table').bootstrapTable('getSelections'), function (row) {
+      return row.device_type
+    })
+  }
+
+  function getDeviceNameSelections() {
+    return $.map($('#table').bootstrapTable('getSelections'), function (row) {
+      return row.device_name
     })
   }
 

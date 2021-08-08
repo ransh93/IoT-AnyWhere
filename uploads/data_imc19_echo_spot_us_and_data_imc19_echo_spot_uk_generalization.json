@@ -1,0 +1,1302 @@
+{
+    "ietf-mud:mud": {
+        "mud-version": 1,
+        "mud-url": "https://example.com",
+        "is-supported": 48,
+        "systeminfo": "data_imc19_echo_spot_us_and_data_imc19_echo_spot_uk_generalization",
+        "cache-validity": true,
+        "last-update": "2021-08-07T18:11:19",
+        "from-device-policy": {
+            "access-lists": {
+                "access-list": [
+                    {
+                        "name": "mud-44918-v4fr"
+                    }
+                ]
+            }
+        },
+        "to-device-policy": {
+            "access-lists": {
+                "access-list": [
+                    {
+                        "name": "mud-44918-v4to"
+                    }
+                ]
+            }
+        }
+    },
+    "ietf-access-control-list:access-lists": {
+        "acl": [
+            {
+                "name": "mud-44918-v4fr",
+                "type": "ipv4",
+                "aces": {
+                    "ace": [
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "dcape-na.amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "spectrum.s3.amazonaws.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 80
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "ietf-acldns:dst-dnsname": "2.android.pool.ntp.org"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 123
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "ietf-acldns:dst-dnsname": "ntp-g7g.amazon.com"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 123
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "det-ta-g7g.amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "s3.amazonaws.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "d3p8zr0ffa9t17.cloudfront.net"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 80
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "arcus-uswest.amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "api.amazonalexa.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "d3h5bk8iotgjvw.cloudfront.net"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 80
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "dp-gw-na.amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "andr-785f3ec7eb-cbc62794911ff31b-6275da66d5254dff56-2400322.na.api.amazonvideo.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "device-metrics-us.amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "prod.amcs-tachyon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "Andr-22-Amazon-AEORK-304635user635559420.api.amazonvideo.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "prod.amazoncrl.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 80
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "tinytts.amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "unagi-na.amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "drive.amazonaws.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "api.amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "destination-ipv4-network": "52.49.14.5/32"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 57198
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "destination-ipv4-network": "18.202.231.49/32"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 34461
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "*.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "alexa.amazon.co.uk"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:dst-dnsname": "msh.amazon.co.uk"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "destination-ipv4-network": "155.198.142.7/32"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 53
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "destination-ipv4-network": "155.33.33.75/32"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 53
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "mud-44918-v4to",
+                "type": "ipv4",
+                "aces": {
+                    "ace": [
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "drive.amazonaws.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "andr-785f3ec7eb-cbc62794911ff31b-6275da66d5254dff56-2400322.na.api.amazonvideo.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "d3h5bk8iotgjvw.cloudfront.net"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 80
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "ietf-acldns:src-dnsname": "ntp-g7g.amazon.com"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 123
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "api.amazonalexa.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "ietf-acldns:src-dnsname": "2.android.pool.ntp.org"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 123
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "dp-gw-na.amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "arcus-uswest.amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "prod.amazoncrl.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 80
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "unagi-na.amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "det-ta-g7g.amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "api.amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "device-metrics-us.amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "dcape-na.amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "spectrum.s3.amazonaws.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 80
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "d3p8zr0ffa9t17.cloudfront.net"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 80
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "prod.amcs-tachyon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "Andr-22-Amazon-AEORK-304635user635559420.api.amazonvideo.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "tinytts.amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "s3.amazonaws.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "source-ipv4-network": "52.49.14.5/32"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 57198
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "source-ipv4-network": "18.202.231.49/32"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 34461
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "andr-785f3ec7eb-cbc62794911ff31b-6275da66d5254dff56-2400322.eu.api.amazonvideo.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "source-ipv4-network": "*"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "api.eu.amazonalexa.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "lv1-app-prde.immedia-semi.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "pub.dub.prod.shfss.smarthome-cameras.alexa.a2z.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "s3-eu-west-1.amazonaws.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "andr-785f3ec7eb-cbc62794911ff31b-6275da66d5254dff56-2400322.ec.api.amazonvideo.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "msh.amazon.co.uk"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "andr.eu.api.amazonvideo.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "m.media-amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "mobileanalytics.us-east-1.amazonaws.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "cognito-identity.us-east-1.amazonaws.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "wl.amazon-dss.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "alexa.amazon.co.uk"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "source-ipv4-network": "155.198.142.7/32"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 53
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "source-ipv4-network": "155.33.33.75/32"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 53
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 6,
+                                    "ietf-acldns:src-dnsname": "avs-alexa-5-eu.amazon.com"
+                                },
+                                "tcp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 443
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

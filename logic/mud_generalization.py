@@ -6,7 +6,7 @@ from logic.mud_generator import MudGenerator
 class MudGeneralization(object):
     def __init__(self, identical_rules, first_non_similar_from_rules, first_non_similar_to_rules,
                  second_non_similar_from_rules, second_non_similar_to_rules, generalized_from_rules, generalized_to_rules,
-                 first_mud_name, first_mud_location, second_mud_name, second_mud_location):
+                 first_mud_name, first_mud_location, second_mud_name, second_mud_location, device_type, device_name, mongo_dal):
         self.identical_from_rules = []
         self.identical_to_rules = []
         self.non_similar_from_rules = []
@@ -35,11 +35,12 @@ class MudGeneralization(object):
         self.to_rules = self.identical_to_rules + self.non_similar_to_rules + self.generalized_to_rules
 
         # TODO: address the url and system info parameters to put the real ones
-        mud_generator = MudGenerator(1, 'https://lighting.example.com/lightbulb2000', 48, True,
-                          'The BMS Example Light Bulb')
+        generalized_title_name = "{}_and_{}_generalization".format(first_mud_name, second_mud_name)
+        mud_generator = MudGenerator(1, 'https://example.com', 48, True, generalized_title_name)
         generalized_mud_name = "{}_and_{}_generalization.json".format(first_mud_name, second_mud_name)
-        mud_generator.generate_mud(self.from_rules, self.to_rules, generalized_mud_name)
-
+        mud_generator.generate_mud(self.from_rules, self.to_rules, mongo_dal, generalized_mud_name,
+                                   generalized_title_name, first_mud_location, second_mud_location,
+                                   device_name, device_type)
 
     def create_generalized_rules(self, rules_to_generalize, direction):
         for base_rule,relations_rules in rules_to_generalize.items():
@@ -60,13 +61,13 @@ class MudGeneralization(object):
                 elif similarity_vector.primary_similarity_type == constants.DOMAIN_BASED_SIMILARITY:
                     if constants.PORT_PROTOCOL_BASED_SIMILARITY in similarity_vector.get_all_vector_similarity_types():
                         new_rule = copy.deepcopy(rule)
-                        generalized_domain = base_rule.get_generalized_domain() # TODO: been tired
+                        generalized_domain = base_rule.get_generalized_domain()
                         new_rule.set_dns_to_generalized_domain(generalized_domain) # set the new domain
                         self.add_generalized_rule(new_rule, direction)
                     else:
                         new_rule1 = copy.deepcopy(rule)
                         new_rule2 = copy.deepcopy(base_rule)
-                        generalized_domain = base_rule.get_generalized_domain() # TODO: been tired
+                        generalized_domain = base_rule.get_generalized_domain()
                         new_rule1.set_dns_to_generalized_domain(generalized_domain)  # set the new domain
                         new_rule2.set_dns_to_generalized_domain(generalized_domain)  # set the new domain
                         self.add_generalized_rule(new_rule1, direction)

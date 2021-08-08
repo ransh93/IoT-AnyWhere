@@ -1,0 +1,124 @@
+{
+    "ietf-mud:mud": {
+        "mud-version": 1,
+        "mud-url": "https://example.com",
+        "is-supported": 48,
+        "systeminfo": "blink_camera_uk_and_blink_camera_us_and_blink_camera_uk_generalization_generalization",
+        "cache-validity": true,
+        "last-update": "2021-07-25T00:43:58",
+        "from-device-policy": {
+            "access-lists": {
+                "access-list": [
+                    {
+                        "name": "mud-75774-v4fr"
+                    }
+                ]
+            }
+        },
+        "to-device-policy": {
+            "access-lists": {
+                "access-list": [
+                    {
+                        "name": "mud-75774-v4to"
+                    }
+                ]
+            }
+        }
+    },
+    "ietf-access-control-list:access-lists": {
+        "acl": [
+            {
+                "name": "mud-75774-v4fr",
+                "type": "ipv4",
+                "aces": {
+                    "ace": [
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "destination-ipv4-network": "155.33.33.75/32"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 53
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-frdev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "destination-ipv4-network": "155.198.142.7/32"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "from-device",
+                                    "destination-port": {
+                                        "operator": "eq",
+                                        "port": 53
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "mud-75774-v4to",
+                "type": "ipv4",
+                "aces": {
+                    "ace": [
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "source-ipv4-network": "155.33.33.75/32"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 53
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        },
+                        {
+                            "name": "cl0-todev",
+                            "matches": {
+                                "ipv4": {
+                                    "protocol": 17,
+                                    "source-ipv4-network": "155.198.142.7/32"
+                                },
+                                "udp": {
+                                    "ietf-mud:direction-initiated": "to-device",
+                                    "source-port": {
+                                        "operator": "eq",
+                                        "port": 53
+                                    }
+                                }
+                            },
+                            "actions": {
+                                "forwarding": "accept"
+                            }
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

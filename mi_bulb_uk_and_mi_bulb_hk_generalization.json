@@ -1,16 +1,16 @@
 {
     "ietf-mud:mud": {
         "mud-version": 1,
-        "mud-url": "https://lighting.example.com/lightbulb2000",
+        "mud-url": "https://example.com",
         "is-supported": 48,
-        "systeminfo": "The BMS Example Light Bulb",
+        "systeminfo": "mi_bulb_uk_and_mi_bulb_hk_generalization",
         "cache-validity": true,
-        "last-update": "2021-07-03T20:19:06",
+        "last-update": "2021-07-24T11:39:40",
         "from-device-policy": {
             "access-lists": {
                 "access-list": [
                     {
-                        "name": "mud-47077-v4fr"
+                        "name": "mud-34074-v4fr"
                     }
                 ]
             }
@@ -19,7 +19,7 @@
             "access-lists": {
                 "access-list": [
                     {
-                        "name": "mud-47077-v4to"
+                        "name": "mud-34074-v4to"
                     }
                 ]
             }
@@ -28,7 +28,7 @@
     "ietf-access-control-list:access-lists": {
         "acl": [
             {
-                "name": "mud-47077-v4fr",
+                "name": "mud-34074-v4fr",
                 "type": "ipv4",
                 "aces": {
                     "ace": [
@@ -55,7 +55,7 @@
                 }
             },
             {
-                "name": "mud-47077-v4to",
+                "name": "mud-34074-v4to",
                 "type": "ipv4",
                 "aces": {
                     "ace": [

@@ -92,7 +92,7 @@ class Ace(object):
     def get_ace_lable_text(self):
         lable_text = f"Rule direction = {self.rule_type} \n\nRule details: \n"
         for match in self.matches:
-            lable_text += match.get_match_lable_text()
+            lable_text += str(match.get_match_lable_text())
 
         return lable_text
 
@@ -127,7 +127,11 @@ class Ace(object):
         return identifier
 
     def get_ace_port(self):
-        port = self.matches[1].port
+        if self.matches[1].match_type == "tcp" or self.matches[1].match_type == "udp":
+            port = self.matches[1].port
+        else:
+            port = None
+
         return port
 
     def set_dns_to_generalized_domain(self, generalized_domain):
@@ -167,15 +171,27 @@ class Match():
 
         if match_type == "tcp":
             if rule_type == "from":
-                dp = match_value[constants.TCP_DESTINATION_PORT_KEY]
-                self.operator = dp[constants.TCP_OPERATOR_KEY]
-                self.port = dp[constants.TCP_PORT_KEY]
-                self.direction_initiated = match_value[constants.TCP_DIRECTION_INITIATED_KEY]
+                try:
+                    dp = match_value[constants.TCP_DESTINATION_PORT_KEY]
+                    self.operator = dp[constants.TCP_OPERATOR_KEY]
+                    self.port = dp[constants.TCP_PORT_KEY]
+                    self.direction_initiated = match_value[constants.TCP_DIRECTION_INITIATED_KEY]
+                except:
+                    sp = match_value[constants.TCP_SOURCE_PORT_KEY]
+                    self.operator = sp[constants.TCP_OPERATOR_KEY]
+                    self.port = sp[constants.TCP_PORT_KEY]
+
 
             elif rule_type == "to":
-                sp = match_value[constants.TCP_SOURCE_PORT_KEY]
-                self.operator = sp[constants.TCP_OPERATOR_KEY]
-                self.port = sp[constants.TCP_PORT_KEY]
+                try:
+                    sp = match_value[constants.TCP_SOURCE_PORT_KEY]
+                    self.operator = sp[constants.TCP_OPERATOR_KEY]
+                    self.port = sp[constants.TCP_PORT_KEY]
+                except:
+                    dp = match_value[constants.TCP_DESTINATION_PORT_KEY]
+                    self.operator = dp[constants.TCP_OPERATOR_KEY]
+                    self.port = dp[constants.TCP_PORT_KEY]
+
 
         # TODO: think what i do with the situation that in from o have source and vice versa
         # TODO: happens in us_yi or uk_yi
@@ -328,13 +344,17 @@ class Match():
     def get_match_lable_text(self):
         if self.match_type == "tcp":
             if self.rule_type == "from":
-                return (f"\t\t Port = {self.port}, Direction = {self.direction_initiated} \n")
+                return (f"\t\t Source port = *, Destination Port = {self.port} \n")
 
             elif self.rule_type == "to":
-                return(f"\t\t Port = {self.port} \n")
+                return(f"\t\t Source port = {self.port}, Destination Port = * \n")
 
         if self.match_type == "udp":
-            return(f"\t\t Port = {self.port} \n")
+            if self.rule_type == "from":
+                return(f"\t\t Source port = *, Destination Port = {self.port} \n")
+            elif self.rule_type == "to":
+                return (f"\t\t Source port = {self.port}, Destination Port = * \n")
+
 
         if self.match_type == "ipv4":
             if hasattr(self, 'dns_name'):
@@ -405,6 +425,9 @@ class Match():
                 return self.protocol == other.protocol and self.extended_domain_identicality(self.dns_name, other.dns_name)
             elif hasattr(self, 'ipv4_network') and hasattr(other, 'ipv4_network'):
                 return self.protocol == other.protocol and self.ipv4_network == other.ipv4_network
+            elif not hasattr(self, 'ipv4_network') and not hasattr(other, 'ipv4_network') and not hasattr(self, 'dns_name') and not hasattr(other, 'dns_name'):
+                print("There is no IP or Domain in that match, consider as the same match")
+                return True
 
         if self.match_type == "icmp":
             return self.icmp_type == other.icmp_type and self.icmp_code == other.icmp_code

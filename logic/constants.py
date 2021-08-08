@@ -48,4 +48,4 @@ ICMP_TYPE = "type"
 ICMP_CODE = "code"
 
 # Muds coordinator table
-DATA_TO_COLUMNS = ['_id', 'mud_name', 'dev-type', 'device_name', 'dev_location', 'mud_file_path']
+DATA_TO_COLUMNS = ['_id', 'mud_name', 'device_type', 'device_name', 'dev_location', 'mud_file_path']
