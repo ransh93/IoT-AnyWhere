@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://visjs.github.io/vis-network/standalone/umd/vis-network.min.js"></script>
+    <script src="../static/js/vis-network.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>{{ title }}</title>
 
@@ -57,6 +57,24 @@ const options = {
   },
 };
 
+const options_old = {
+  manipulation: true,
+  height: "90%",
+  layout: {
+    hierarchical: {
+      enabled: true,
+      levelSeparation: 300,
+        direction: 'LR',
+        nodeSpacing: 200
+    },
+  },
+  physics: {
+    hierarchicalRepulsion: {
+      nodeDistance: 300,
+    },
+  },
+};
+
 $(document).ready(function(){
     var container = document.getElementById("mynetwork");
     var data = { nodes: {{ nodes | tojson }}, edges: {{ edges | tojson }}};
@@ -76,7 +94,9 @@ $(document).ready(function(){
         <div class="panel-group">
             <div class="col-xs-12 col-sm-6">
                 <div class="panel panel-info">
-                    <div class="panel-heading">Compare {{ first_mud_filename }} to {{ second_mud_filename }}</div>
+                    <div class="panel-heading">Compare {{ first_mud_filename }} to {{ second_mud_filename }}
+                        <img src="../static/flags/{{ first_mud_location }}_32.png">
+                    </div>
                     <div class="panel-body">
                         {% for ace in first_direction_dt%}
                             <br>
@@ -122,7 +142,9 @@ $(document).ready(function(){
 
             <div class="col-xs-12 col-sm-6">
                 <div class="panel panel-info">
-                    <div class="panel-heading">Compare {{ second_mud_filename }} to {{ first_mud_filename }}</div>
+                    <div class="panel-heading">Compare {{ second_mud_filename }} to {{ first_mud_filename }}
+                        <img src="../static/flags/{{ second_mud_location }}_32.png">
+                    </div>
                     <div class="panel-body">
                         {% for ace in second_direction_dt%}
                             <br>

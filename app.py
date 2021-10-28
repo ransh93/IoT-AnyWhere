@@ -170,7 +170,8 @@ def compare_muds():
     return render_template('new_comparison.html', first_direction_dt=two_directional_dt[0],
                            second_direction_dt=two_directional_dt[1], first_mud_filename=first_file_name,
                            second_mud_filename=second_file_name, compare_metrices=compare_metrices,related_rules=related_rules,
-                           nodes=relations_graph[0], edges=relations_graph[1])
+                           nodes=relations_graph[0], edges=relations_graph[1],
+                           first_mud_location=first_mud_location, second_mud_location=second_mud_location)
 
 
 @app.route('/UploadAndCompare', methods=['GET', 'POST'])

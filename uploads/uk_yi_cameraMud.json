@@ -48,41 +48,6 @@
             "forwarding" : "accept"
           }
         }, {
-          "name" : "from-ipv4-uk_yi_camera-1",
-          "matches" : {
-            "ipv4" : {
-              "protocol" : 6,
-              "destination-ipv4-network" : "49.51.203.28/32"
-            },
-            "tcp" : {
-              "destination-port" : {
-                "operator" : "eq",
-                "port" : 443
-              },
-              "ietf-mud:direction-initiated" : "from-device"
-            }
-          },
-          "actions" : {
-            "forwarding" : "accept"
-          }
-        }, {
-          "name" : "from-ipv4-uk_yi_camera-2",
-          "matches" : {
-            "ipv4" : {
-              "protocol" : 17,
-              "destination-ipv4-network" : "147.161.9.180/32"
-            },
-            "udp" : {
-              "destination-port" : {
-                "operator" : "eq",
-                "port" : 26903
-              }
-            }
-          },
-          "actions" : {
-            "forwarding" : "accept"
-          }
-        }, {
           "name" : "from-ipv4-uk_yi_camera-3",
           "matches" : {
             "ipv4" : {
@@ -153,24 +118,6 @@
                 "operator" : "eq",
                 "port" : 53
               }
-            }
-          },
-          "actions" : {
-            "forwarding" : "accept"
-          }
-        }, {
-          "name" : "from-ipv4-uk_yi_camera-7",
-          "matches" : {
-            "ipv4" : {
-              "protocol" : 6,
-              "ietf-acldns:dst-dnsname" : "download.eu.xiaoyi.com"
-            },
-            "tcp" : {
-              "destination-port" : {
-                "operator" : "eq",
-                "port" : 80
-              },
-              "ietf-mud:direction-initiated" : "from-device"
             }
           },
           "actions" : {
@@ -257,23 +204,6 @@
             "forwarding" : "accept"
           }
         }, {
-          "name" : "to-ipv4-uk_yi_camera-3",
-          "matches" : {
-            "ipv4" : {
-              "protocol" : 17,
-              "source-ipv4-network" : "147.161.9.180/32"
-            },
-            "udp" : {
-              "source-port" : {
-                "operator" : "eq",
-                "port" : 26903
-              }
-            }
-          },
-          "actions" : {
-            "forwarding" : "accept"
-          }
-        }, {
           "name" : "to-ipv4-uk_yi_camera-4",
           "matches" : {
             "ietf-mud:mud" : {
@@ -326,41 +256,7 @@
           "actions" : {
             "forwarding" : "accept"
           }
-        }, {
-          "name" : "to-ipv4-uk_yi_camera-7",
-          "matches" : {
-            "ipv4" : {
-              "protocol" : 6,
-              "ietf-acldns:src-dnsname" : "download.eu.xiaoyi.com"
-            },
-            "tcp" : {
-              "source-port" : {
-                "operator" : "eq",
-                "port" : 80
-              }
-            }
-          },
-          "actions" : {
-            "forwarding" : "accept"
-          }
-        }, {
-          "name" : "to-ipv4-uk_yi_camera-8",
-          "matches" : {
-            "ipv4" : {
-              "protocol" : 6,
-              "source-ipv4-network" : "49.51.203.28/32"
-            },
-            "tcp" : {
-              "source-port" : {
-                "operator" : "eq",
-                "port" : 443
-              }
-            }
-          },
-          "actions" : {
-            "forwarding" : "accept"
-          }
-        } ]
+        }]
       }
     }, {
       "name" : "from-ethernet-uk_yi_camera",

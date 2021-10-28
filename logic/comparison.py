@@ -169,11 +169,11 @@ class MudComparer(object):
 
         # TODO: change the color by the different mud
         if direction == 'from':
-            color = "#FFCFCF"
-            #color = "#FFFFFF"
+            #color = "#FFCFCF"
+            color = "#FFFFFF"
         else:
-            color = "#90ee90"
-            #color = "#FFFFFF"
+            #color = "#90ee90"
+            color = "#FFFFFF"
 
         size = 150
         node_font = {"face": "monospace", "align": "left", "size": 24}
@@ -194,20 +194,42 @@ class MudComparer(object):
 
                     }
 
+        #if "dc-eu01-euwest1" in label_text:
+        #    nodes.append(base_node)
+
         nodes.append(base_node)
+
         for relation_component in relation_components:
+            import uuid
             relation_rule, similarity_vector = relation_component # separate the rule and its similarity vector
             label_text = relation_rule.get_ace_lable_text()
             relation_node = {
                                 "id": relation_rule.name,
                                 "size": size,
                                 "label": label_text,
-                                "color": "#90ee90",
+                                #"color": "#90ee90",
+                                "color": "#FFFFFF",
                                 "shape": shape,
                                 "font": node_font,
                             }
 
+            #if "dc-na04-useast2" in label_text:
+            #    nodes.append(relation_node)
             nodes.append(relation_node)
+
+
+            new_node = {
+                                "id": "new_node"+str(uuid.uuid1()),
+                                "size": size,
+                                "label": label_text.replace("api.eu", "*"),
+                                #"color": "#90ee90",
+                                "color": "#FFFFFF",
+                                "shape": shape,
+                                "font": node_font,
+                            }
+
+            nodes.append(new_node)
+
 
             edge_font = {"face": "monospace", "size": 24}
             edge = {
@@ -215,12 +237,42 @@ class MudComparer(object):
                         "to": relation_rule.name,
                         "physics": physics,
                         "label": similarity_vector.primary_similarity_type,
+                        #"label": "DOMAIN_BASED_SIMILARITY",
                         "arrows": "to;from",
                         "smooth": smooth,
                         "font": edge_font
                     }
 
-            edges.append(edge)
+            edge_new1 = {
+                        "from": base_rule.name,
+                        "to": "new_node",
+                        "physics": physics,
+                        #"label": similarity_vector.primary_similarity_type,
+                        "label": "DOMAIN_BASED_SIMILARITY",
+                        "arrows": "to;from",
+                        "smooth": smooth,
+                        "font": edge_font
+                    }
+
+            edge_new2 = {
+                        "from": relation_rule.name,
+                        "to": "new_node",
+                        "physics": physics,
+                        #"label": similarity_vector.primary_similarity_type,
+                        "label": "DOMAIN_BASED_SIMILARITY",
+                        "arrows": "to;from",
+                        "smooth": smooth,
+                        "font": edge_font
+                    }
+
+
+
+            #if edge["from"] == "from-ipv4-smartthings_hub_merged_uk-11" and edge["to"] == "from-ipv4-smartthings_hub_merged_us-10":
+            #    edges.append(edge)
+                #edges.append(edge_new1)
+                #edges.append(edge_new2)
+            #edges.append(edge)
+
 
             '''
             if not similarity_vector.primary_similarity_type == "PORT_PROTOCOL_BASED_SIMILARITY":

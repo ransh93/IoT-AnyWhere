@@ -358,6 +358,7 @@ class Match():
 
         if self.match_type == "ipv4":
             if hasattr(self, 'dns_name'):
+                self.dns_name = self.dns_name.lower()
                 return(f"\t\t Protocol = {self.convert_protocol_identification(self.protocol)}, Doamin = {self.dns_name} \n")
             elif hasattr(self, 'ipv4_network'):
                 return(f"\t\t Protocol = {self.convert_protocol_identification(self.protocol)}, IP = {self.ipv4_network} \n")
@@ -427,7 +428,7 @@ class Match():
                 return self.protocol == other.protocol and self.ipv4_network == other.ipv4_network
             elif not hasattr(self, 'ipv4_network') and not hasattr(other, 'ipv4_network') and not hasattr(self, 'dns_name') and not hasattr(other, 'dns_name'):
                 print("There is no IP or Domain in that match, consider as the same match")
-                return True
+                return self.protocol == other.protocol
 
         if self.match_type == "icmp":
             return self.icmp_type == other.icmp_type and self.icmp_code == other.icmp_code

@@ -19,6 +19,9 @@
 *.iml
 *.iws
 
+# Muds uploads
+uploads/
+
 ## Additional for IntelliJ
 out/
 

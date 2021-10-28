@@ -27,23 +27,6 @@
       "type" : "ipv4-acl-type",
       "aces" : {
         "ace" : [ {
-          "name" : "from-ipv4-us_yi_camera-0",
-          "matches" : {
-            "ipv4" : {
-              "protocol" : 17,
-              "destination-ipv4-network" : "147.161.9.36/32"
-            },
-            "udp" : {
-              "destination-port" : {
-                "operator" : "eq",
-                "port" : 32320
-              }
-            }
-          },
-          "actions" : {
-            "forwarding" : "accept"
-          }
-        }, {
           "name" : "from-ipv4-us_yi_camera-1",
           "matches" : {
             "ipv4" : {
@@ -144,23 +127,6 @@
       "type" : "ipv4-acl-type",
       "aces" : {
         "ace" : [ {
-          "name" : "to-ipv4-us_yi_camera-0",
-          "matches" : {
-            "ipv4" : {
-              "protocol" : 17,
-              "source-ipv4-network" : "147.161.9.36/32"
-            },
-            "udp" : {
-              "source-port" : {
-                "operator" : "eq",
-                "port" : 32320
-              }
-            }
-          },
-          "actions" : {
-            "forwarding" : "accept"
-          }
-        }, {
           "name" : "to-ipv4-us_yi_camera-1",
           "matches" : {
             "ipv4" : {

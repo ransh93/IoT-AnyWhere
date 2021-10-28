@@ -29,23 +29,6 @@
       "type" : "ipv4-acl-type",
       "aces" : {
         "ace" : [ {
-          "name" : "from-ipv4-hk_yi_camera-0",
-          "matches" : {
-            "ipv4" : {
-              "protocol" : 17,
-              "destination-ipv4-network" : "147.161.9.60/32"
-            },
-            "udp" : {
-              "destination-port" : {
-                "operator" : "eq",
-                "port" : 3863
-              }
-            }
-          },
-          "actions" : {
-            "forwarding" : "accept"
-          }
-        }, {
           "name" : "from-ipv4-hk_yi_camera-1",
           "matches" : {
             "ipv4" : {
@@ -226,23 +209,6 @@
               "source-port" : {
                 "operator" : "eq",
                 "port" : 53
-              }
-            }
-          },
-          "actions" : {
-            "forwarding" : "accept"
-          }
-        }, {
-          "name" : "to-ipv4-hk_yi_camera-5",
-          "matches" : {
-            "ipv4" : {
-              "protocol" : 17,
-              "source-ipv4-network" : "147.161.9.60/32"
-            },
-            "udp" : {
-              "source-port" : {
-                "operator" : "eq",
-                "port" : 3863
               }
             }
           },
