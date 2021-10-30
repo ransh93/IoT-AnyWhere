@@ -13,3 +13,20 @@ down and gain insights about the origin of the differences.
 can serve as a white-list for the network behavior of both
 MUDs (represent two locations in our experiments), this
 is done by covering both input MUDs.
+
+
+| <img src="/images/mudis_mud_addition.PNG" width="100%" height="400"> | 
+|:--:| 
+| *Add a new MUD screen - gives users the ability to add new generated MUDs into the system for further investigation* |
+
+| <img src="/images/mudis_main_screen.PNG" width="100%" height="400"> | 
+|:--:| 
+| *MUDIS main screen - gives users the ability to choose two MUDs and to compare and generalize them using the system* |
+
+| <img src="/images/mudis_mi_compare.PNG" width="100%" height="700"> | 
+|:--:| 
+| *MUDIS Xioami ligth bulb comapre - compare two Xioami MUDs and get profound insights over thier network behaviour and communication diffrences* |
+
+| <img src="/images/mudis_yi_compare.PNG" width="100%" height="700"> | 
+|:--:| 
+| *MUDIS YI smart camera comapre - compare two YI MUDs and get profound insights over thier network behaviour and communication diffrences* |
