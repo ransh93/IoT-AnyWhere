@@ -14,6 +14,19 @@ can serve as a white-list for the network behavior of both
 MUDs (represent two locations in our experiments), this
 is done by covering both input MUDs.
 
+<details><summary><b>ADD A NEW MUD</b></summary>
+<p>
+
+- bla
+- bla2
+  
+This is a basic feature that gives researchers the option to add MUDS into the system.<br>
+The uploaded MUD is then saved at the server and in a dedicated MongoDB for further use.<br>
+When adding a new MUD you can add some helpful metadata like - device name, device type, the device geolocation etc.
+
+</p>
+</details>
+
 
 | <img src="images/mudis_mud_addition.PNG" width="100%" height="400"> | 
 |:--:| 
