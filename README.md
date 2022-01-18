@@ -14,7 +14,9 @@ can serve as a white-list for the network behavior of both
 MUDs (represent two locations in our experiments), this
 is done by covering both input MUDs.
 
-<details><summary><b>ADD A NEW MUD</b></summary>
+<details>
+  <summary><b>ADD A NEW MUD</b></summary>
+  
 <p>
 
 - bla
