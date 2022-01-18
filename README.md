@@ -17,8 +17,10 @@ is done by covering both input MUDs.
 <details>
   <summary><b>ADD A NEW MUD</b></summary>
   
-  - bla
-  - bla3
+  <ul>
+    <li>bla</li>
+    <li>bla3</li>
+  </ul>
   
   <p>
 
