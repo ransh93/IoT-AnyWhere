@@ -15,7 +15,7 @@ MUDs (represent two locations in our experiments), this
 is done by covering both input MUDs.
 
 
-| <img src="/images/mudis_mud_addition.PNG" width="100%" height="400"> | 
+| <img src="images/mudis_mud_addition.PNG" width="100%" height="400"> | 
 |:--:| 
 | *Add a new MUD screen - gives users the ability to add new generated MUDs into the system for further investigation* |
 
